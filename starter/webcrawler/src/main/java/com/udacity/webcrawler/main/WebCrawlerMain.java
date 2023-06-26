@@ -23,6 +23,10 @@ public final class WebCrawlerMain {
     this.config = Objects.requireNonNull(config);
   }
 
+  private static final String RESULT_PATH = "result.json";
+
+  private static final String PROFILE_OUTPUT_PATH = "profileData.txt";
+
   @Inject
   private WebCrawler crawler;
 
@@ -35,12 +39,12 @@ public final class WebCrawlerMain {
     CrawlResult result = crawler.crawl(config.getStartPages());
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
     if (StringUtil.isBlank(config.getResultPath())) {
-      System.out.println("The result path is empty.");
+      resultWriter.write(Path.of(RESULT_PATH));
     } else {
       resultWriter.write(Path.of(config.getResultPath()));
     }
     if (StringUtil.isBlank(config.getProfileOutputPath())) {
-      System.out.println("The profile output path is empty.");
+      profiler.writeData(Path.of(PROFILE_OUTPUT_PATH));
     } else {
       profiler.writeData(Path.of(config.getProfileOutputPath()));
     }

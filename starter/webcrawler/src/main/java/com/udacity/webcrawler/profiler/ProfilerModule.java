@@ -9,7 +9,7 @@ import java.time.Clock;
 /**
  * Guice dependency injection module that installs a {@link Profiler} singleton.
  *
- * <p>Requires a {@link java.time.Clock} to already be bound.
+ * <p>Requires a {@link Clock} to already be bound.
  */
 public final class ProfilerModule extends AbstractModule {
   @Provides
