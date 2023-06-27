@@ -12,6 +12,8 @@ import com.udacity.webcrawler.profiler.ProfilerModule;
 import org.jsoup.internal.StringUtil;
 
 import javax.inject.Inject;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -40,11 +42,13 @@ public final class WebCrawlerMain {
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
     if (StringUtil.isBlank(config.getResultPath())) {
       resultWriter.write(Path.of(RESULT_PATH));
+      System.out.println(Files.readString(Path.of(RESULT_PATH)));
     } else {
       resultWriter.write(Path.of(config.getResultPath()));
     }
     if (StringUtil.isBlank(config.getProfileOutputPath())) {
       profiler.writeData(Path.of(PROFILE_OUTPUT_PATH));
+      System.out.println(Files.readString(Path.of(PROFILE_OUTPUT_PATH)));
     } else {
       profiler.writeData(Path.of(config.getProfileOutputPath()));
     }
